@@ -1,9 +1,8 @@
+import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { FC } from "react";
-import { Button } from "../../ui/button";
+import { useFormContext } from "react-hook-form";
 
 type Props = {
-  onReset: () => void;
   resetLabel?: string;
   disabled?: boolean;
   className?: string;
@@ -12,38 +11,31 @@ type Props = {
 /**
  * ResetButton component
  *
- * @param {Function} onReset - The function to be called on reset
- * @param {string} resetLabel - The label of the reset button
- * @param {boolean} disabled - Whether the button is disabled
- * @param {string} className - The class name of the button
- *
- * @returns {ReactElement} - The submit reset button component
- *
- * @example
- *
- * ```tsx
- * <ResetButton onReset={handleReset} resetLabel="Clear" disabled={false} className="btn btn-danger" />
- * ```
+ * @param resetLabel - The label for the reset button.
+ * @param disabled - Whether the button is disabled.
+ * @param className - The class name for the button.
+ * @returns The ResetButton component.
  */
 
-export const ResetButton: FC<Props> = ({
-  onReset,
+export const ResetButton = ({
   resetLabel = "Reset",
   disabled = false,
   className,
-}) => {
+}: Props) => {
+  const form = useFormContext();
   return (
-    <div className={cn(className)}>
-      <Button
-        type="reset"
-        variant={"outline"}
-        size={"sm"}
-        onClick={onReset}
-        disabled={disabled}
-      >
-        {resetLabel}
-      </Button>
-    </div>
+    <Button
+      type="reset"
+      variant={"outline"}
+      size={"sm"}
+      disabled={disabled}
+      className={cn(className)}
+      onClick={() => {
+        form.reset();
+      }}
+    >
+      {resetLabel}
+    </Button>
   );
 };
 
