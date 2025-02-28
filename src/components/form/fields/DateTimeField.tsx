@@ -1,14 +1,32 @@
+/*
+ * File: DateField.tsx
+ * Responsibility: Component for rendering a date field with a calendar picker.
+
+ * Author: Aditya Chakraborty
+ * Created: 2024-11-11
+ * Last Modified By: Null
+ * Last Modified At: Null
+ * Version: 0.1.0
+ */
+
 import { FieldValues, Path, useFormContext } from "react-hook-form";
 
 import { DateTimePicker } from "@/components/ui/date-time-picker";
-import { FormField, FormItem, FormLabel, FormMessage } from "../../ui/form";
+import {
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { cn } from "@/lib/utils";
 
-interface Props<T extends FieldValues> {
+type Props<T extends FieldValues> = {
   name: Path<T>;
   label?: string;
   required?: boolean;
   disabled?: boolean;
-}
+  className?: string;
+};
 
 /**
  * DateField component
@@ -17,6 +35,7 @@ interface Props<T extends FieldValues> {
  * @param label - The label for the field.
  * @param required - Whether the field is required.
  * @param disabled - Whether the field is disabled.
+ * @param className - The class name for the field.
  * @returns The DateField component.
  */
 
@@ -25,6 +44,7 @@ export const DateTimeField = <T extends FieldValues>({
   label,
   required = false,
   disabled = false,
+  className,
 }: Props<T>) => {
   const { control } = useFormContext<T>();
 
@@ -33,7 +53,7 @@ export const DateTimeField = <T extends FieldValues>({
       control={control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex flex-col">
+        <FormItem className={cn(className, "flex flex-col")}>
           {label && (
             <FormLabel htmlFor={name}>
               <span>{label}</span>

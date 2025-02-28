@@ -25,6 +25,7 @@ type TextFieldProps<T extends FieldValues> = {
   className?: string;
   inputClass?: string;
   disabled?: boolean;
+  iconClass?: string;
 };
 
 /**
@@ -39,6 +40,7 @@ type TextFieldProps<T extends FieldValues> = {
  * @param loading If the field is loading.
  * @param className The class name of the
  * @param inputClass The class name of the input.
+ * @param iconClass The class name of the icon.
  * @param disabled If the field is disabled.
  *
  * @returns The text field component.
@@ -60,6 +62,7 @@ export const TextField = <T extends FieldValues>({
   loading,
   className,
   inputClass,
+  iconClass,
   disabled = false,
 }: TextFieldProps<T>) => {
   const { control } = useFormContext<T>();
@@ -94,10 +97,16 @@ export const TextField = <T extends FieldValues>({
                   size={"sm"}
                   onClick={action}
                   type="button"
-                  className="absolute right-0.5 top-0.5"
+                  className={cn("absolute right-0.5 top-0.5", iconClass)}
                 >
-                  {icon}
+                  {icon ? icon : <X className="h-4 w-4 text-red-500" />}
                 </Button>
+              )}
+
+              {!action && icon && (
+                <div className={cn("absolute right-2 top-3", iconClass)}>
+                  {icon}
+                </div>
               )}
             </div>
           </FormControl>
