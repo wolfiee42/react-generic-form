@@ -1,14 +1,3 @@
-/*
- * File: DateField.tsx
- * Responsibility: Component for rendering a date field with a calendar picker.
-
- * Author: Aditya Chakraborty
- * Created: 2024-11-11
- * Last Modified By: Null
- * Last Modified At: Null
- * Version: 0.1.0
- */
-
 import { FieldValues, Path, useFormContext } from "react-hook-form";
 
 import { DateTimePicker } from "@/components/ui/date-time-picker";
